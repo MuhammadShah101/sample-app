@@ -1,23 +1,8 @@
-from forms import LoginForm
-from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask import (
-    Flask,
-    flash,
-    render_template,
-    redirect,
-    url_for
-)
-
-
-app = Flask(__name__)
-app.config.from_object(Config)
-db =SQLAlchemy(app)
-migrate = Migrate(app, db)
+from app import app
+from app.forms import LoginForm
+from flask import flash, render_template, url_for, redirect
 
 @app.route('/')
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
