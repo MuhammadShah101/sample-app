@@ -22,19 +22,19 @@ def register():
         hashed_password = new_user.set_password_hash(form.password.data)
         db.session.add(new_user)
         db.session.commit()
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.email.data, form.remember_me.data))
-        return redirect(url_for('home'))
+        flash(f'New user {new_user.email} has been registered!')
+        return redirect(url_for('hello'))
     return render_template('register.html', form=form)
 
 @app.route("/test")
 def test():
     users = list(Users.query.all())
+    users = [{user.email:user.hash_password} for user in users]
     return jsonify(users)
 
 
 @app.route('/home') #decorator
-def index():
+def home():
     user = {'username': 'Daniel'}
     posts = [
         {
