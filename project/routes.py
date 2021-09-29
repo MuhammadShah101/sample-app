@@ -23,7 +23,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         flash(f'New user {new_user.email} has been registered!')
-        return redirect(url_for('hello'))
+        return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
 @app.route("/test")
@@ -33,8 +33,8 @@ def test():
     return jsonify(users)
 
 
-@app.route('/home') #decorator
-def home():
+@app.route('/index') #decorator
+def index():
     user = {'username': 'Daniel'}
     posts = [
         {
